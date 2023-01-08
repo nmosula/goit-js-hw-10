@@ -3,7 +3,7 @@ import {fetchCountries} from "./js/fetchCountries.js";
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
 
-const DEBOUNCE_DELAY = 1000;
+const DEBOUNCE_DELAY = 300;
 
 const inpSearch = document.querySelector("#search-box");
 const countryList = document.querySelector(".country-list");
@@ -22,7 +22,7 @@ function onInputCountry() {
                 if (data.length == 1)
                     showCountryInfo(data);
                 else if (data.length > 1 && data.length <= 10)
-                    showCountriesInfo(data);
+                    showCountries(data);
                 else if (data.length > 10)
                     Notiflix.Notify.info("Too many matches found. Please enter a more specific name.", { timeout: 5000 });
 
@@ -32,12 +32,32 @@ function onInputCountry() {
 }
 
 function showCountryInfo(data) {
-    console.log("Info One country");
-    console.log(data);
+    const markup = data.map(({
+        flags: {svg: country_flag},
+        name: { official: country_name },
+        capital: country_capital,
+        population,
+        languages
+    }) => `<li>
+    <p class="country_name"><img src="${country_flag}" alt="${country_name}">
+    <span>${country_name}</span></p>
+    <p><b>Capital:</b> ${country_capital}</p>
+    <p><b>Population:</b> ${population}</p>
+    <p><b>Languages:</b> ${Object.values(languages)}</p>
+    </li>`);
+
+    countryList.innerHTML = markup.join('');
 }
 
 
-function showCountriesInfo(data) {
-    console.log("Info many countries");
-    console.log(data);
+function showCountries(data) {
+    const markup = data.map(({
+        flags: {svg: country_flag},
+        name: {common: country_name}
+    }) => `<li>
+    <p class="country_name"><img src="${country_flag}" alt="${country_name}">
+    <span>${country_name}</span></p>
+    </li>`);
+
+    countryList.innerHTML = markup.join('');
 }
