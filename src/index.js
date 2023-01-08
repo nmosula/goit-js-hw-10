@@ -14,7 +14,11 @@ inpSearch.addEventListener('input', debounce(onInputCountry, DEBOUNCE_DELAY));
 function onInputCountry() {
     const searchCountry = inpSearch.value.trim();
 
-    if (searchCountry == '') return;
+    if (searchCountry == '') {
+        countryList.innerHTML = "";
+        countryInfo.innerHTML = "";
+        return;
+    }
     else if(searchCountry !== '') {
     
         fetchCountries(searchCountry)
