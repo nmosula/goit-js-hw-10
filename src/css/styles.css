@@ -27,17 +27,24 @@ body {
   margin-top: 10px;
 }
 
-.country-list li p.country_name {
+.country-list li p.countries_name {
+  display: flex;
+  align-items: center;
+  font-size: 18;
+  font-weight: 700;
+}
+
+p.country_name {
   display: flex;
   align-items: center;
   font-size: 24;
   font-weight: 700;
 }
 
-.country-list img {
+.country_flag {
   width: 50px;
 }
 
-.country-list span {
+.country-list span, .country-info span {
   margin-left: 20px;
 }

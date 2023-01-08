@@ -38,15 +38,16 @@ function showCountryInfo(data) {
         capital: country_capital,
         population,
         languages
-    }) => `<li>
-    <p class="country_name"><img src="${country_flag}" alt="${country_name}">
+    }) => `
+    <p class="country_name"><img class="country_flag" src="${country_flag}" alt="${country_name}">
     <span>${country_name}</span></p>
     <p><b>Capital:</b> ${country_capital}</p>
     <p><b>Population:</b> ${population}</p>
     <p><b>Languages:</b> ${Object.values(languages)}</p>
-    </li>`);
+    `);
 
-    countryList.innerHTML = markup.join('');
+    countryList.innerHTML = "";
+    countryInfo.innerHTML = markup.join('');
 }
 
 
@@ -55,9 +56,10 @@ function showCountries(data) {
         flags: {svg: country_flag},
         name: {common: country_name}
     }) => `<li>
-    <p class="country_name"><img src="${country_flag}" alt="${country_name}">
+    <p class="countries_name"><img class="country_flag" src="${country_flag}" alt="${country_name}">
     <span>${country_name}</span></p>
     </li>`);
 
     countryList.innerHTML = markup.join('');
+    countryInfo.innerHTML = "";
 }
